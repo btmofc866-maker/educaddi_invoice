@@ -1,0 +1,19 @@
+{
+  "courses": [
+    {"name": "AutoCAD", "price": 11682},
+    {"name": "Catia", "price": 21122},
+    {"name": "Catia Kinematics", "price": 15000},
+    {"name": "Solidworks", "price": 18762},
+    {"name": "Creo", "price": 23482},
+    {"name": "NX-CAD", "price": 23482},
+    {"name": "Revit MEP", "price": 25783},
+    {"name": "NX-CAM", "price": 23482},
+    {"name": "Hypermesh", "price": 17582},
+    {"name": "AnsysWB", "price": 18762},
+    {"name": "Ansys", "price": 18762},
+    {"name": "Solid Edge", "price": 8820},
+    {"name": "Nastran", "price": 18762},
+    {"name": "Registration", "price": 1000},
+    {"name": "Registration", "price": 5000}
+   ]
+}

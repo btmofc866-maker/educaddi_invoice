@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Invoice - EduCADD Centre</title>
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f8f8f8;
+        height: 100vh;
+    }
+
+    .invoice-box {
+        position: relative;
+        width: 100%;
+        max-width: 210mm; /* A4 width */
+        min-height: 297mm; /* A4 height */
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 15mm 20mm; /* Keep left-right gap */
+        box-sizing: border-box;
+    }
+
+    /* Header - fits perfectly top within margin */
+    .header-image {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    /* Footer - fits perfectly bottom within margin */
+    .footer-image {
+        position: relative;
+        width: 100%;
+        margin-top: auto;
+        padding: 0;
+    }
+
+    .footer-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin-top: 10px;
+        object-fit: cover;
+    }
+
+    /* Body section styles */
+    .section-title {
+        font-size: 14px;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 5px;
+        font-size: 11px;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 3px 4px;
+        font-size: 11px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .equal-table th,
+    .equal-table td {
+        width: calc(100% / 5);
+        text-align: center;
+    }
+
+    .left-table th,
+    .left-table td {
+        text-align: left;
+    }
+
+   .terms {
+    font-size: 10px;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+    /* Footer area (EduCADD bottom-right) */
+    .footer {
+        position: relative;
+        margin-top: 10px;
+        width: 100%;
+        font-size: 10px;
+        min-height: 30px;
+    }
+
+    .footer-row {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .signature-section {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        text-align: right;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        font-weight: bold;
+    }
+
+    /* Print button style */
+    .print-button-container {
+        position: fixed;
+        top: 15px;
+        right: 25px;
+        z-index: 1000;
+    }
+
+    .print-button {
+        background-color: #b71c1c;
+        color: white;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .print-button:hover {
+        background-color: #d32f2f;
+    }
+
+    /* Print view */
+    @media print {
+        body {
+            background-color: white;
+            margin: 0;
+        }
+
+        .invoice-box {
+            box-shadow: none;
+            border: none;
+            width: 100%;
+            max-width: 100%;
+            padding: 15mm 20mm; /* Keep same left-right gap in print */
+            height: 297mm;
+            justify-content: space-between;
+        }
+
+        .print-button-container {
+            display: none;
+        }
+
+        .header-image,
+        .footer-image {
+            margin: 0;
+        }
+
+        .header-image img,
+        .footer-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .signature-section {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+</style>
+
+
+
+
+       
+</head>
+<body>
+    <!-- Print Button -->
+    <div class="print-button-container">
+        <button class="print-button" onclick="window.print()">🖨️ Print</button>
+    </div>
+
+    <div class="invoice-box" id="invoiceContent">
+        <div class="header-image">
+            <img src="{{ url_for('static', filename='header1.jpg') }}" alt="EduCADD Header Banner">
+        </div>
+
+        <!-- Student Details -->
+        <div class="section-title">Student Details</div>
+        <table class="equal-table">
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Mobile Number</th>
+                <th>Address</th>
+                <th>Center Location</th>
+            </tr>
+            <tr>
+                <td>{{ student_id }}</td>
+                <td>{{ name }}</td>
+                <td>{{ mobile }}</td>
+                <td>{{ address }}</td>
+                <td>{{ center_location }}</td>
+            </tr>
+        </table>
+
+        <!-- Course Information -->
+        <div class="section-title">Course Information</div>
+        <table class="left-table">
+            <tr>
+                <th>Course Category</th>
+                <td>{{ category }}</td>
+            </tr>
+        </table>
+
+        <h3>Selected Courses:</h3>
+        <ul>
+            {% for course in selected_course_details %}
+                <li>{{ course.name }} - ₹{{ course.price }}</li>
+            {% endfor %}
+        </ul>
+
+        <table class="left-table">
+            <tr><td><strong>Total Price:</strong></td><td>₹{{ total_price }}</td></tr>
+            <tr><td><strong>Discount:</strong></td><td>₹{{ discount }}</td></tr>
+            <tr><td><strong>Offered Price:</strong></td><td>₹{{ final_price }}</td></tr>
+            <tr><td><strong>Offered Price in Words:</strong></td><td>{{ final_price_words }} rupees only</td></tr>
+        </table>
+
+        {% if installments > 1 %}
+        <div class="section-title">Installment Details</div>
+        <table class="equal-table">
+            <thead>
+                <tr>
+                    <th>Installment No.</th>
+                    <th>Amount (₹)</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for installment in installment_details %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>₹{{ installment.amount }}</td>
+                    <td>{{ installment.date }}</td>
+                    <td>{{ installment.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <div class="section-title">Terms and Conditions</div>
+        <div class="terms">
+            <p>
+                1. Two Passport size photographs must be submitted at the time of registration.<br>
+                2. In case of installment, a minimum of 60% of the total fee must be paid as the first installment.<br>
+                3. If payment of the fee is made by cheque and the cheque is dishonored, Rs. 200/- handling charge will be collected.<br>
+                4. Failure to pay installments on due dates will attract a fine or revision of course fee.<br>
+                5. Students must adhere to batch timings specified by the center.<br>
+                6. Follow all rules and regulations within the center.<br>
+                7. Fees once paid are non-refundable. Receipt generation implies acceptance of terms.
+            </p>
+        </div>
+
+       <div class="footer">
+    <div class="footer-row">
+        <div class="signature-section">
+            <strong>EduCADD</strong>
+        </div>
+    </div>
+</div>
+
+
+        <div class="footer-image">
+            <img src="{{ url_for('static', filename='footer2.jpg') }}" alt="EduCADD Footer Banner">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "courses": [
+    {"name": "C Programming", "price": 8000},
+    {"name": "C++ Programming", "price": 8000},
+    {"name": "Python with Django", "price": 15000},
+    {"name": "Core Java", "price": 12000},
+    {"name": "Java Script", "price": 15000},
+    {"name": "Advance Java", "price": 15000},
+    {"name": "ReactJS", "price": 12000},
+    {"name": "MySQL Database", "price": 15000},
+    {"name": "MongoDB Database", "price": 15000},
+    {"name": "Front End Development", "price": 20000},
+    {"name": "Java Full Stack Web Development", "price": 35000},
+    {"name": "Python Full Stack Web Development", "price": 35000},
+    {"name": "DevOps", "price": 25000},
+    {"name": "Registration", "price": 1000},
+    {"name": "Basic Computer Course", "price": 12000},
+    {"name": "AIML", "price": 50000}
+   ]
+}

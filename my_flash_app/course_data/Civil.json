@@ -1,0 +1,21 @@
+{
+  "courses": [
+    {"name": "AutoCAD", "price": 11682},
+    {"name": "3dsMax", "price": 19942},
+    {"name": "RevitMEP", "price": 25783},
+    {"name": "Lumion", "price": 15222},
+    {"name": "BIM360", "price": 50000},
+    {"name": "Revit Architecture", "price": 21122},
+    {"name": "Sketchup(V-ray)", "price": 24780},
+    {"name": "Sketchup", "price": 20780},
+    {"name": "Revit Structure", "price": 19942},
+    {"name": "StadPro", "price": 18762},
+    {"name": "Photoshop", "price": 10856},
+    {"name": "Quantity Take Off", "price": 15222},
+    {"name": "Primavera", "price": 18762},
+    {"name": "MS Project", "price": 14042},
+    {"name": "ETABS", "price": 18762},
+    {"name": "Registration", "price": 500},
+    {"name": "Registration", "price": 1000}
+  ]
+}
